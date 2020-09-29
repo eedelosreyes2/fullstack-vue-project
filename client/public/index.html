@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+        <title><%= htmlWebpackPlugin.options.title %></title>
+    </head>
+    <body>
+        <noscript>
+            <strong
+                >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't
+                work properly without JavaScript enabled. Please enable it to
+                continue.</strong
+            >
+        </noscript>
+        <div id="app"></div>
+    </body>
+</html>
+
+<!-- Question 1 -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Toggle Message</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            <a href="#" @click="isVisible = !isVisible"
+                >Want to buy a new car?</a
+            >
+            <p v-if="isVisible">Call +11 22 33 44 now!</p>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    isVisible: false,
+                },
+            });
+            // Example case
+            console.log(document.getElementById("app").innerHTML);
+        </script>
+    </body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Add Users</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            First name: <input type="text" id="firstName" /> Last name:
+            <input type="text" id="lastName" />
+            <button type="button" onclick="onSubmit()">Add user</button>
+
+            <table>
+                <caption>
+                    Users
+                </caption>
+                <thead>
+                    <tr>
+                        <th>Index</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: "#app",
+                // Modify Vue object here
+                data: {
+                    users: [],
+                },
+            });
+
+            // Example case
+            if (vm.users) {
+                vm.users.push({ firstName: "John", lastName: "Doe" });
+                vm.users.push({ firstName: "Joe", lastName: "" });
+            }
+
+            document.getElementsByTagName("input")[0].value = "Ann";
+            document
+                .getElementsByTagName("input")[0]
+                .dispatchEvent(new Event("input"));
+            document.getElementsByTagName("input")[1].value = "Franklin";
+            document
+                .getElementsByTagName("input")[1]
+                .dispatchEvent(new Event("input"));
+            document.getElementsByTagName("button")[0].click();
+
+            // Event handler
+            function onSubmit(e) {
+                vm.users.push({
+                    firstName: document.getElementById("firstName").value,
+                    lastName: document.getElementById("lastName").value,
+                });
+                document.getElementById("firstName").value = "";
+                document.getElementById("lastName").value = "";
+
+                var tbody = document.querySelector("tbody");
+                tbody.innerHTML = "";
+
+                for (var i = 0; i < vm.users.length; i++) {
+                    var tr = tbody.insertRow();
+                    var td0 = tr.insertCell(0);
+                    var td1 = tr.insertCell(1);
+                    var td2 = tr.insertCell(2);
+
+                    td0.appendChild(document.createTextNode(i + 1));
+                    td1.appendChild(
+                        document.createTextNode(vm.users[i].firstName)
+                    );
+                    td2.appendChild(
+                        document.createTextNode(vm.users[i].lastName)
+                    );
+                }
+            }
+
+            setTimeout(() =>
+                console.log(document.querySelector("tbody").innerHTML)
+            );
+        </script>
+    </body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Labeled Input</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            <labeledinput id="username">Username: </labeledinput>
+        </div>
+        <script>
+            // Write your code here
+            Vue.component("labeledinput", {
+                props: ["id"],
+                template: `<div>
+                    <label for="id">Username:</label>
+                    <input type="text" id="id">
+                </div>`,
+            });
+
+            var vm = new Vue({
+                el: "#app",
+            });
+
+            // Example case
+            console.log(document.getElementById("app").innerHTML);
+        </script>
+    </body>
+</html> -->
+
+<!-- 
+<!DOCTYPE html>
+<html lang="=en">
+    <head>
+        <title>Image Gallery</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            <image-gallery
+                v-bind:links="['https://goo.gl/kjzfbE', 'https://goo.gl/d2JncW']"
+            />
+        </div>
+        <script>
+            // Write your code here;
+            Vue.component("image-gallery", {
+                props: ["links"],
+                data() {
+                    return {
+                        mylinks: this.links,
+                    };
+                },
+
+                template: `
+                        <div>
+                            <div v-for="(link, index) in mylinks"
+                            :key="index"
+                            class="image">
+                                <img :src=link alt="poop"/>
+                                <button v-on:click="mylinks.splice(index, 1)" class="remove">X</button>
+                            </div>
+                        </div>`,
+
+                methods: {
+                    removelink(index) {
+                        console.log(index, this.mylinks);
+                        this.mylinks.splice(index, 1);
+                    },
+                },
+            });
+
+            var vm = new Vue({
+                el: "#app",
+            });
+
+            // Example case
+            let firstButton = document.querySelectorAll(
+                "div.image > button"
+            )[0];
+            if (firstButton) {
+                firstButton.click();
+            }
+
+            setTimeout(() =>
+                console.log(document.getElementById("app").innerHTML)
+            );
+        </script>
+    </body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Avatar</title>
+    <style>
+        /* Write your CSS solution here (do not edit the surrounding HTML) */
+    </style>
+</head>
+
+<body>
+    <img class="avatar" src="https://goo.gl/khGCrk" alt="avatar" />
+</body>
+
+</html>
+
+<style>
+    .avatar {
+        border-radius: 50%;
+        height: 150px;
+        width: 150px;
+        border: 2px solid gray;
+    }
+</style> -->
+
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Semantics</title>
+</head>
+
+<body>
+    <main>
+        <h1>Lorem Ipsum</h1>
+
+        <figure class="image">
+            <img src="https://goo.gl/zF9eky" alt="Lorem Ipsum">
+            <figcaption class="caption">Lorem Ipsum</figcaption>
+        </figure>
+
+        <details class="lorem-ipsum">
+            <summary class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</summary>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Curabitur vitae hendrerit mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Mauris lacinia scelerisque nibh nec gravida.
+                Duis malesuada nec nibh sit amet pulvinar.
+                Phasellus congue porttitor arcu, ut suscipit nibh aliquam vel.
+                Nunc arcu lectus, egestas ut sem ac, euismod porttitor eros.
+                Phasellus tincidunt consequat pharetra. Maecenas sodales purus at nulla finibus dapibus.
+                Nullam varius at nisl vel euismod. Fusce aliquet ligula non tempor fermentum.
+                Nam fermentum posuere mauris, quis aliquam nibh dictum sed.</p>
+        </details>
+    </main>
+</body>
+
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <title>Toggle Message</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <a href="#" @click="isVisible = !isVisible">Want to buy a new car?</a>
+        <p v-if="isVisible">Call +11 22 33 44 now!</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                isVisible: false
+            }
+        });
+
+        // Example case
+        console.log(document.getElementById("app").innerHTML);
+    </script>
+</body>
+
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Comments</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            <rating />
+        </div>
+        <script>
+            // Write your code here
+            const stars = [1, 2, 3, 4, 5];
+
+            Vue.component("rating", {
+                data() {
+                    return {
+                        rating: 5,
+                    };
+                },
+                template: `
+                    <div>
+                        <span v-for="(star, index) in stars" :key=index 
+                        v-if="index < rating" @click="rating = index; console.log(rating)">*</span>
+                        <span @click="rating = index + 1" v-else> . </span>
+                    </div>
+                `,
+            });
+
+            var vm = new Vue({
+                el: "#app",
+            });
+
+            // Example case
+            // let span = document.getElementsByTagName("span")[2];
+            // if (span) {
+            //     span.click();
+            // }
+
+            setTimeout(() =>
+                console.log(document.getElementById("app").innerHTML)
+            );
+        </script>
+    </body>
+</html> -->
