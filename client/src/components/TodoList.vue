@@ -45,16 +45,16 @@ export default {
         return {
             newTodo: "",
             todos: [
-                { text: "Take out trash", complete: false },
-                { text: "Wash the dishes", complete: false },
-                { text: "Do laundry", complete: false },
+                { text: "Take out trash", completed: false },
+                { text: "Wash the dishes", completed: false },
+                { text: "Do laundry", completed: false },
             ],
         };
     },
     methods: {
         onSubmit(event) {
             if (this.newTodo.trim() !== "") {
-                this.todos.push({ text: this.newTodo });
+                this.todos.push({ text: this.newTodo, completed: false });
             }
             this.newTodo = "";
             event.preventDefault();
